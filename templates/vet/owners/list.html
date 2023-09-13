@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Pets Owners</title>
+{% endblock title %}
+
+{% block header %}
+<h1>Pets owners list</h1>
+{% endblock header %}
+
+{% block content %}
+<table>
+  <tr>
+    <th>ID</th>
+    <th>First Name</th>
+    <th>Email</th>
+  </tr>
+  {% for owner in owners %}
+  <tr>
+    <!-- etiqueta de html -> p, table, h1, title -->
+    <!-- atributo href -> a que url nos vamos a rediccionar -->
+    <!-- reversed_app_url:reversed_singular_url -->
+    <td>
+      <a href="{% url 'vet:owners_detail' pk=owner.id %}">{{ owner.id }}</a>
+    </td>
+    <td>{{ owner.first_name }}</td>
+    <td>{{ owner.email }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock content %}

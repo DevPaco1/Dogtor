@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Pet Owner</title>
+{% endblock title %}
+
+{% block header %}
+<h1>Create Pets owners </h1>
+{% endblock header %}
+
+<!-- El contexto es -> 'owner' -->
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button>Crear Pet Owner</button>
+</form>
+{% endblock content %}
