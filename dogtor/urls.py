@@ -16,11 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from blog.admin import blog_admin_site
+from vet.admin import vet_admin_site
 
 # si no tienes include -> reversed url se pone como 3er parametro ejemplo -> name="owners_list"
 # si SI tienes include -> reversed url se pone como 2do parametro DENTRO del include() -> include(("vet.urls", "vet"))
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("blogadmin/", blog_admin_site.urls),
+    path("vetadmin/", vet_admin_site.urls),
     path("vet/", include(("vet.urls", "vet"))),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("api/", include(("api.urls","api"))),
 ]
+
+
+admin.site.index_title = "Dogtor Admin"
+admin.site.site_header = "Dogtor Admin"
+admin.site.site_title = "Dogtor Admin Panel"

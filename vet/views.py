@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView,UpdateView
 from .forms import PetOwnerForm, PetForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 
 # Models
 from vet.models import PetOwner, Pet
@@ -88,7 +89,7 @@ class OwnersList(ListView):
     context_object_name = "owners"  # 3
 
 
-class OwnerDetail(DetailView):
+class OwnerDetail(LoginRequiredMixin,DetailView):
     """Render a specific Pet Owner with their pk."""
 
     # 1. Modelo
@@ -113,7 +114,10 @@ class OwnersCreate(CreateView):
 
     success_url = reverse_lazy("vet:owners_list")
 
-class OwnersUpdate(UpdateView):
+class OwnersUpdate(PermissionRequiredMixin,UpdateView):
+
+    permission_required = "vet.change_petowner"
+    raise_exception = True
 
     model = PetOwner
     template_name = "vet/owners/update.html"

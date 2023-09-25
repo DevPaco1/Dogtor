@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "vet",
+    "blog",
+    "authentication",
+    "rest_framework",
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -115,6 +119,10 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+LOGIN_REDIRECT_URL = "vet/owners/"
+LOGOUT_REDIRECT_URL = "/"
+AUTH_USER_MODEL = "authentication.ModUser"
 
 
 # Static files (CSS, JavaScript, Images)
